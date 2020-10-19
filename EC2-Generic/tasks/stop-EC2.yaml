@@ -1,0 +1,20 @@
+- name: Removing older entries from stop.txt
+  connection: local
+  shell: truncate -s 0 stop.txt
+  become: yes
+
+- name: Stopping EC2 instance
+  connection: local
+  ec2:
+   instance_ids: "{{ ansible_ec2_instance_id }}"
+   region: ap-northeast-1
+   state: stopped
+   wait: yes
+   #when: stop_instances == "true"
+   # notify: Starting EC2 instance
+
+- name: Storing EC2 Instance IDs stopped by this play
+  connection: local
+  become: yes
+  shell: echo "{{ ansible_ec2_instance_id }}" >> stop.txt
+

@@ -1,0 +1,14 @@
+- name: Starting EC2 instance
+  connection: local
+  ec2:
+    instance_ids: "{{ item }}"
+    region: ap-northeast-1
+    state: running
+    wait: yes
+  #when: start_instances == "true"
+  loop: "{{ lookup('file', 'stop.txt').splitlines() }}"
+
+  #- name: Removing older entries from stop.txt
+#connection: local
+# shell: echo '' > stop.txt
+# become: yes

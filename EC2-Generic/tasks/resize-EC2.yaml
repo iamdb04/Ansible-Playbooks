@@ -1,0 +1,26 @@
+- name: Playbook for Fetching Instance IDs
+  include_tasks: precheck.yaml
+
+- name: Playbook for Stopping EC2 Instances
+  include_tasks: stop-EC2.yaml
+
+- name: Change the EC2 Instance Type
+  connection: local
+  shell: >
+     aws ec2 modify-instance-attribute  --instance-id "{{ item }}"  --instance-type "{{ ins_type }}"
+  delegate_to: localhost
+  when: resize == "true"
+
+  loop: "{{ lookup('file', 'stop.txt').splitlines() }}"
+  
+- name: Playbook for Starting EC2 Instances
+  include_tasks: start-EC2.yaml
+
+
+
+
+
+  # local_action:
+  # module: >
+  # shell
+  # aws ec2 modify-instance-attribute --instance-id "{{ item  }}" -- --instance-type "{'Value': '{{ ins_type }}'}"

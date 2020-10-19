@@ -1,0 +1,10 @@
+- name: To Capture Snapshot
+  connection: local
+  ec2_snapshot:
+    instance_id: "{{ ansible_ec2_instance_id }}"
+    device_name: /dev/sda1
+    region: ap-northeast-1
+    description: Snapshot to be taken from existing EBS Volume
+  when: snapshot_creation == "true"
+
+

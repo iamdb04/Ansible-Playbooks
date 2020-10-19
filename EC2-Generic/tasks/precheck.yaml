@@ -1,0 +1,10 @@
+- name: Get Instance IDs of Nodes
+  action: ec2_metadata_facts
+  register: out
+- name: Get Variables
+  debug:
+   msg: "{{ ansible_ec2_instance_id }}"
+- name: Get EC2 Instance IDs
+  set_fact:
+    instance_id: "{{ ansible_ec2_instance_id }}"
+

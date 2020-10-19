@@ -1,0 +1,22 @@
+---
+- name: Playbook for Fetching Instance IDs
+  include_tasks: precheck.yaml
+  when: stop_instances == "true" or snapshot_creation == "true"
+
+- name: Playbook for Stopping EC2 Instances
+  include_tasks: stop-EC2.yaml
+  when: stop_instances == "true"
+
+- name: Playbook for Creating Snapshots
+  include_tasks: snapshot-EC2.yaml
+  when: snapshot_creation == "true"
+
+- name: Playbook for Resizing EC2 Instances
+  include_tasks: resize-EC2.yaml
+  when: resize == "true"
+
+- name: Playbook for Starting EC2 Instances
+  include_tasks: start-EC2.yaml
+  when: start_instances == "true"
+
+

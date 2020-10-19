@@ -1,0 +1,6 @@
+stop_instances: "false"
+start_instances: "false"
+snapshot_creation: "false"
+resize: "false"
+ins_type: "{{ value }}"
+

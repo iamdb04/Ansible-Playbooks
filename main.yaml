@@ -1,0 +1,12 @@
+---
+- name: This play is used to stop start create snapshot and resizing of ec2 instances
+  hosts: all
+  ignore_errors: true
+  serial: 1
+  vars_files:
+       - vars.yaml
+  gather_facts: false
+  roles:
+       - { role: EC2-Generic }
+
+

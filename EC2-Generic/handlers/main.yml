@@ -1,0 +1,8 @@
+- name: Starting EC2 instance
+  connection: local
+  ec2:
+    instance_ids: "{{ ansible_ec2_instance_id }}"
+    region: ap-northeast-1
+    state: running
+    wait: yes
+
